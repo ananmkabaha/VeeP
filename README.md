@@ -2,11 +2,16 @@
 In this repository, we provide an implementation for the paper "Boosting Robustness Verification of Semantic Feature Neighborhoods" https://arxiv.org/abs/2209.05446. The repository owner is anan.kabaha@campus.technion.ac.il. 
 
 <strong>To get the models and the samples:</strong><br />
-cd ./data/<br />
-bash get_samples.sh<br />
-cd ../models/<br />
-bash get_models.sh<br />
-cd ..
+
+<div style="background-color: #f2f2f2; padding: 1px;">
+  <pre style="font-family: 'Courier New', monospace; font-size: 14px;">
+  cd ./data/
+  bash get_samples.sh
+  cd ../models/
+  bash get_models.sh
+  cd ..
+</pre>
+</div>
 
 <strong>VeeP paramters:</strong><br />
 --netname: the network name, the extension can be only .onnx<br />
