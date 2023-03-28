@@ -13,6 +13,9 @@ In this repository, we provide an implementation for the paper "Boosting Robustn
 </pre>
 </div>
 
+<strong>Install ERAN's dependencies:</strong><br />
+Follow the instructions in https://github.com/eth-sri/eran <br/>
+
 <strong>VeeP paramters:</strong><br />
 --netname: the network name, the extension can be only .onnx<br />
 --dataset: the dataset, can be either mnist, cifar10, or imagenet<br />
