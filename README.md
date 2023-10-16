@@ -5,6 +5,7 @@ In this repository, we provide an implementation for the paper "Boosting Robustn
 
 <div style="background-color: #f2f2f2; padding: 1px;">
   <pre style="font-family: 'Courier New', monospace; font-size: 14px;">
+  pip install gdown
   cd ./data/
   bash get_samples.sh
   cd ../models/
