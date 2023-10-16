@@ -105,7 +105,7 @@ class VeeP:
         delta_step_max_velocity = self.approximate_max_velocity(self.velocity_deltas[0:self.M-1],self.velocity[0:self.M-1])
         expected_delta_step = min(delta_step_expected_failure,delta_step_max_velocity)
         expected_delta_step = self.refine_prediction(expected_delta_step)
-        expected_delta_step = max(delta_step_expected_failure,self.delta_min)
+        expected_delta_step = max(expected_delta_step,self.delta_min)
         [specLB, specUB] = self.perturbations.Perturbe(sample, delta, expected_delta_step)  
         sensitivity,elapsed_time  = self.network.test(Dataset.normalize(specLB), Dataset.normalize(specUB), label, True)        
         self.update_sensitivity_vec(expected_delta_step, sensitivity, sensitivity_zero)
