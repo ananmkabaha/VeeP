@@ -45,12 +45,11 @@ if __name__ == '__main__':
     parser.add_argument('--pertubration_type', type=str, default=config.pertubration_type, help='perturbation type can be either brightness, saturation, hue, lightness, or brightness_and_contrast.')
     parser.add_argument('--gpus', type=str, default=config.gpus, help='list of gpus to use')
     parser.add_argument('--output_file', type=str, default=config.output_file, help='output file')
-    
-    
     args = parser.parse_args()
     for k, v in vars(args).items():
         setattr(config, k, v)
     config.json = vars(args)
+    
     netname = config.netname
     dataset = config.dataset
     M = config.M
@@ -79,14 +78,12 @@ if __name__ == '__main__':
     
     results = ""
     for i, sample in enumerate(samples):
-        
         start_time = time.time()
         image = np.float64(sample)/np.float64(255)
         label = int(labels[i])
         specLB = Dataset.normalize(image)
         specUB = Dataset.normalize(image)
         sensitivity,elapsed_time = network.test(specLB, specUB, int(label), True)
-        certified = []
         if  sensitivity>0:
             target_delta = attack.attack(image,label,veep,Dataset)
             target_delta_split = target_delta/number_of_workers
