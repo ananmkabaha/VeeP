@@ -27,12 +27,9 @@ from datasets import *
 from VeeP import *
 from attack import *
 from perturbations import *
-
 import warnings
 warnings.simplefilter('ignore', np.RankWarning)
 warnings.filterwarnings("ignore")
-
-
 parser = argparse.ArgumentParser(description='',  formatter_class=argparse.ArgumentDefaultsHelpFormatter)
 parser.add_argument('--netname', type=isnetworkfile, default=config.netname, help='the network name, the extension can be only .onnx')
 parser.add_argument('--dataset', type=str, default=config.dataset, help='the dataset, can be either mnist, cifar10, or imagenet')
@@ -41,12 +38,11 @@ parser.add_argument('--timeout', type=str, default=config.TimeOut, help='timeout
 parser.add_argument('--M', type=str, default=config.M, help='history length')
 parser.add_argument('--pertubration_type', type=str, default=config.pertubration_type, help='perturbation type can be either brightness, saturation, hue, lightness, or brightness_and_contrast.')
 parser.add_argument('--gpus', type=str, default=config.gpus, help='list of gpus to use')
-
-
 args = parser.parse_args()
 for k, v in vars(args).items():
     setattr(config, k, v)
 config.json = vars(args)
+
 netname = config.netname
 dataset = config.dataset
 M = int(config.M)
@@ -54,7 +50,6 @@ max_itr = int(config.max_itr)
 pertubration_type = config.pertubration_type
 gpus = ([int(i) for i in config.gpus.split(",")])
 TimeOut = config.TimeOut
-
 assert os.path.isfile(netname), f"Model file not found. Please check \"{netname}\" is correct."
 assert is_perturbation(pertubration_type), "perturbation type is not supported." 
 
@@ -63,9 +58,7 @@ attack = Attack(pertubration_type)
 os.sched_setaffinity(0,cpu_affinity)
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
 os.environ["CUDA_VISIBLE_DEVICES"] = str(gpus[0])
-
 veep = VeeP( netname, M, config.default_steps, pertubration_type, Dataset, gpus[0],TimeOut)
-
 network = veep.network
 [samples,labels] = Dataset.get_samples()
 host = socket.gethostname()
